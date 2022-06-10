@@ -3,6 +3,8 @@
 #include <string.h>
 #include <getopt.h>
 
+#include "help.h"
+
 /* Variables y Estructuras */
 typedef enum{
   LEAVE,
@@ -11,7 +13,7 @@ typedef enum{
   RM,
   SET,
   HELP
-} subc; //Def del tipo arg
+} subc; //Subcomandos
 
 // FILE *f
 
@@ -22,7 +24,6 @@ void add();
 void rm();
 void set();
 void help();
-// void execute_subcommand();
 
 /* Funciones */
 subc which_subcommand(char *param);
@@ -31,10 +32,11 @@ subc which_subcommand(char *param);
 int main(int argc, char const *argv[])
 {
   char arg[20] = "";
+  // printf("argc: %d\n", argc);
   subc sub_command;
   // printf("%s\n", argv[1]);
 
-  if (argc >= 1)
+  if (argc >= 2)
   {
     strcpy(arg, argv[1]);
     sub_command = which_subcommand(arg);
@@ -51,9 +53,8 @@ int main(int argc, char const *argv[])
   }
   else
   {
-    puts("Falstan argumentos\n");
+    help();
   }
-  
   
   return 0;
 }
@@ -69,7 +70,21 @@ subc which_subcommand(char *param){
   if (strcmp(param, "help") == 0)   return HELP;
 }  
 
-void execute_subcommand (subc sub_command){
-  
-}
+void leave(){
+  puts("es leave\n");
+};
+void arrive(){
+puts("es arrivef\n");
+};
+void add(){
+  puts("es add\n");
+};
+void rm(){
+  puts("es rm\n");
+};
+void set(){
+  puts("es set\n");
+};
+
+
 
