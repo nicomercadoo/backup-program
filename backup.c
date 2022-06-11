@@ -11,8 +11,9 @@ typedef enum{
   ARRIVE,
   ADD,
   RM,
-  SET,
-  HELP
+  CONFIG,
+  HELP,
+  NONE
 } subc; //Subcomandos
 
 // FILE *f
@@ -28,13 +29,10 @@ void help();
 /* Funciones */
 subc which_subcommand(char *param);
 
-
 int main(int argc, char const *argv[])
 {
   char arg[20] = "";
-  // printf("argc: %d\n", argc);
   subc sub_command;
-  // printf("%s\n", argv[1]);
 
   if (argc >= 2)
   {
@@ -46,9 +44,9 @@ int main(int argc, char const *argv[])
     case ARRIVE:  arrive(); break;
     case ADD:     add();    break;
     case RM:      rm();     break;
-    case SET:     set();    break;
+    case CONFIG:  config(); break;
     case HELP:    help();   break;
-    default:                break;
+    default: printf("%s no es un comando valido.\n", arg); break;
     }
   }
   else
@@ -62,12 +60,15 @@ int main(int argc, char const *argv[])
 /* Definicion de Funciones */
 // arg whichArg(char *argv[])
 subc which_subcommand(char *param){
-  if (strcmp(param, "leave") == 0)  return LEAVE ;
-  if (strcmp(param, "arrive") == 0) return ARRIVE;
-  if (strcmp(param, "add") == 0)    return ADD;
-  if (strcmp(param, "rm") == 0)     return RM;
-  if (strcmp(param, "set") == 0)    return SET;
-  if (strcmp(param, "help") == 0)   return HELP;
+  if (strcmp(param, "leave") == 0)        return LEAVE;
+  else if (strcmp(param, "arrive") == 0)  return ARRIVE;
+  else if (strcmp(param, "add") == 0)     return ADD;
+  else if (strcmp(param, "rm") == 0)      return RM;
+  else if (strcmp(param, "config") == 0)  return CONFIG;
+  else if (strcmp(param, "help") == 0 
+    || strcmp(param, "--help") == 0
+    || strcmp(param, "-h") == 0 )         return HELP;
+  else                                    return NONE;
 }  
 
 void leave(){
