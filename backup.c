@@ -1,12 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <getopt.h>
 
 #include "help.h"
+#include "add.h"
 
-/* Variables y Estructuras */
-typedef enum{
+/* Variables, Estructuras y Tipos */
+
+#define MAX 300
+typedef enum {
   LEAVE,
   ARRIVE,
   ADD,
@@ -15,6 +19,16 @@ typedef enum{
   HELP,
   NONE
 } subc; //Subcomandos
+typedef struct {
+  int config_file;
+}flag;
+typedef struct {
+  char *path;
+}TConfig;
+typedef struct {
+  TConfig a[MAX];
+  int cant;
+} TData;
 
 // FILE *f
 
@@ -23,11 +37,12 @@ void leave();
 void arrive();
 void add();
 void rm();
-void set();
-void help();
+void config();
+// void help();
 
 /* Funciones */
 subc which_subcommand(char *param);
+int exist_config_file(char *path);
 
 int main(int argc, char const *argv[])
 {
@@ -36,16 +51,17 @@ int main(int argc, char const *argv[])
 
   if (argc >= 2)
   {
+    //Se decide que subcomando ejecutar en base al argumento ingresado
     strcpy(arg, argv[1]);
     sub_command = which_subcommand(arg);
     switch (sub_command)
     {
-    case LEAVE:   leave();  break;
-    case ARRIVE:  arrive(); break;
-    case ADD:     add();    break;
-    case RM:      rm();     break;
-    case CONFIG:  config(); break;
-    case HELP:    help();   break;
+    case LEAVE:   leave();          break;
+    case ARRIVE:  arrive();         break;
+    case ADD:     add(argv[2]);     break;
+    case RM:      rm();             break;
+    case CONFIG:  config();         break;
+    case HELP:    help();           break;
     default: printf("%s no es un comando valido.\n", arg); break;
     }
   }
@@ -53,12 +69,19 @@ int main(int argc, char const *argv[])
   {
     help();
   }
-  
+  //Se evalua si existe el archivo de configuracion.
+  if (access("./.backup.conf", F_OK) == 0){
+    puts("Exists config file\n");
+  }
+  else puts("Not exists config file");
+  printf("test return: %i\n", access( "./.bakup-config/paths.txt", F_OK ));
+
   return 0;
 }
 
 /* Definicion de Funciones */
-// arg whichArg(char *argv[])
+
+//Evalua cual es el subcomando ingresado
 subc which_subcommand(char *param){
   if (strcmp(param, "leave") == 0)        return LEAVE;
   else if (strcmp(param, "arrive") == 0)  return ARRIVE;
@@ -71,21 +94,16 @@ subc which_subcommand(char *param){
   else                                    return NONE;
 }  
 
+
 void leave(){
   puts("es leave\n");
 };
 void arrive(){
 puts("es arrivef\n");
 };
-void add(){
-  puts("es add\n");
-};
 void rm(){
   puts("es rm\n");
 };
-void set(){
+void config(){
   puts("es set\n");
 };
-
-
-
