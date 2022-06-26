@@ -1,4 +1,3 @@
-#ifndef LEAVE_H
-//INTERFAZ
+#pragma once
+
 void leave();
-#endif

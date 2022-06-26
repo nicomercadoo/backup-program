@@ -1,4 +1,3 @@
-#ifndef ADD_H
-//INTERFAZ
+#pragma once
+
 void add();
-#endif

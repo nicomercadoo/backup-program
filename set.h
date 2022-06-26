@@ -1,4 +1,3 @@
-#ifndef SET_H
-//INTERFAZ
+#pragma once
+
 void set();
-#endif

@@ -1,4 +1,3 @@
-#ifndef RM_H
-//INTERFAZ
+#pragma once
+
 void rm();
-#endif

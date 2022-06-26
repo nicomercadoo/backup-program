@@ -1,4 +1,3 @@
-#ifndef HELP_H
-//INTERFAZ
+#pragma once
+
 void help();
-#endif

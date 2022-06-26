@@ -1,4 +1,3 @@
-#ifndef ARRIVE_H
-//INTERFAZ
+#pragma once
+
 void arrive();
-#endif
