@@ -45,6 +45,7 @@ int main(int argc, char const *argv[])
   }
   else
   {
+    //update();
     help();
   }
   //Se evalua si existe el archivo de configuracion.
