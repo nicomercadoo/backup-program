@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <limits.h>
 
+#include "types.h"
 #include "add.h"
 
 void add(char *argpath){
@@ -20,9 +21,9 @@ void add(char *argpath){
       exit(EXIT_FAILURE);
     }
 
-    file = fopen("paths.txt", "a");
+    file = fopen(PATHS_FILE, "a");
     if (file == NULL) {
-      printf("No se encontro o no se pudo abrir el archivo paths.txt.\n");
+      printf("No se encontro o no se pudo abrir el archivo %s.\n", PATHS_FILE);
       exit(EXIT_FAILURE);
     }
     

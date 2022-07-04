@@ -4,33 +4,11 @@
 #include <string.h>
 #include <getopt.h>
 
+#include "types.h"
 #include "help.h"
 #include "add.h"
 
 /* Variables, Estructuras y Tipos */
-
-#define MAX 300
-typedef enum {
-  LEAVE,
-  ARRIVE,
-  ADD,
-  RM,
-  CONFIG,
-  HELP,
-  NONE
-} subc; //Subcomandos
-typedef struct {
-  int config_file;
-}flag;
-typedef struct {
-  char *path;
-}TConfig;
-typedef struct {
-  TConfig a[MAX];
-  int cant;
-} TData;
-
-// FILE *f
 
 /* Acciones */
 void leave();
