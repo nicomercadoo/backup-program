@@ -11,19 +11,23 @@ void add(char *argpath){
   char *path;
   
   if (argpath == NULL){
-    printf("Faltan Argumentos.\n");
+    printf("Faltan argumentos.\n");
     exit(EXIT_FAILURE);
   } else {
     path = realpath(argpath, buf);
-    file = fopen("paths.txt", "a");
+    if (path == NULL){
+      printf("Ruta invalida.\n");
+      exit(EXIT_FAILURE);
+    }
 
+    file = fopen("paths.txt", "a");
     if (file == NULL) {
       printf("No se encontro o no se pudo abrir el archivo paths.txt.\n");
       exit(EXIT_FAILURE);
     }
+    
     fputs(path, file);fputs("\n",file);
     fflush(file);
     fclose(file);
-  };
-  //TODO: Comprobar que el string 'path' sea una ruta verdadera y existente.
+  }
 }
