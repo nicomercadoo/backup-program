@@ -11,12 +11,12 @@ debug: $(O_FILES)
 
 # backup.o
 build/backup.o: backup.c
-	gcc -c backup.c -o build/backup.o
+	gcc -g3 -c backup.c -o build/backup.o
 
 # help.o
 build/help.o: help.c
-	gcc -c help.c -o build/help.o
+	gcc -g3 -c help.c -o build/help.o
 
 # add.o
 build/add.o: add.c
-	gcc -c add.c -o build/add.o
+	gcc -g3 -c add.c -o build/add.o

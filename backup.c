@@ -22,38 +22,33 @@ void config();
 subc which_subcommand(char *param);
 int exist_config_file(char *path);
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]){
   char arg[20] = "";
   subc sub_command;
 
-  if (argc >= 2)
-  {
+  if (argc >= 2){
     //Se decide que subcomando ejecutar en base al argumento ingresado
     strcpy(arg, argv[1]);
     sub_command = which_subcommand(arg);
-    switch (sub_command)
-    {
-    case LEAVE:   leave();          break;
-    case ARRIVE:  arrive();         break;
-    case ADD:     add(argv[2]);     break;
-    case RM:      rm();             break;
-    case CONFIG:  config();         break;
-    case HELP:    help();           break;
+    switch (sub_command){
+    case LEAVE:   leave();            break;
+    case ARRIVE:  arrive();           break;
+    case ADD:     add(argc,argv);     break;
+    case RM:      rm();               break;
+    case CONFIG:  config();           break;
+    case HELP:    help();             break;
     default: printf("%s no es un comando valido.\n", arg); break;
     }
-  }
-  else
-  {
+  } else {
     //update();
     help();
   }
   //Se evalua si existe el archivo de configuracion.
-  if (access("./.backup.conf", F_OK) == 0){
-    puts("Exists config file\n");
-  }
-  else puts("Not exists config file");
-  printf("test return: %i\n", access( "./.bakup-config/paths.txt", F_OK ));
+  // if (access("./.backup.conf", F_OK) == 0){
+  //   puts("Exists config file\n");
+  // }
+  // else puts("Not exists config file");
+  // printf("test return: %i\n", access( "./.bakup-config/paths.txt", F_OK ));
 
   return 0;
 }
