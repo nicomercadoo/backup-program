@@ -19,12 +19,12 @@ void config();
 // void help();
 
 /* Funciones */
-subc which_subcommand(char *param);
+TSubCommand which_subcommand(char *param);
 int exist_config_file(char *path);
 
 int main(int argc, char const *argv[]){
   char arg[20] = "";
-  subc sub_command;
+  TSubCommand sub_command;
 
   if (argc >= 2){
     //Se decide que subcomando ejecutar en base al argumento ingresado
@@ -56,7 +56,7 @@ int main(int argc, char const *argv[]){
 /* Definicion de Funciones */
 
 //Evalua cual es el subcomando ingresado
-subc which_subcommand(char *param){
+TSubCommand which_subcommand(char *param){
   if (strcmp(param, "leave") == 0)        return LEAVE;
   else if (strcmp(param, "arrive") == 0)  return ARRIVE;
   else if (strcmp(param, "add") == 0)     return ADD;

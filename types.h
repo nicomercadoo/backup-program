@@ -1,7 +1,11 @@
+#pragma once
+
+/* Constantes */
 #define MAX 300
 #define PATHS_FILE "paths.txt"
+#define PATH_MAX 4096
 
-//Colors
+/* Colores */
 #define RED   "\x1B[31m"
 #define GRN   "\x1B[32m"
 #define YEL   "\x1B[33m"
@@ -11,6 +15,7 @@
 #define WHT   "\x1B[37m"
 #define RESET "\x1B[0m"
 
+/* Tipos */
 typedef enum {
   LEAVE,
   ARRIVE,
@@ -19,7 +24,7 @@ typedef enum {
   CONFIG,
   HELP,
   NONE
-} subc; //Subcomandos
+} TSubCommand; //Subcomandos
 
 typedef struct {
   int config_file;
@@ -32,4 +37,4 @@ typedef struct {
 typedef struct {
   TConfig a[MAX];
   int cant;
-} TData;
+} TDataConf;
