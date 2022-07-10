@@ -12,7 +12,7 @@ void add(int argcant, char **argpaths){
   char *path, *argpath;
   int i;
 
-  // Se ordena el archivo
+  // Se ordena el archivo si es que existe
   sort_file(PATHS_FILE);
 
   // Se abre el archivo para agregar la ruta

@@ -13,43 +13,41 @@ void sort_file (char *fname){
 
   // Se abre el archivo en modo lectura
   f = fopen(fname, "r");
-  if (f == NULL) { // El archivo no se pudo abrir
-    printf("No se encontro o no se pudo abrir el archivo %s.\n", PATHS_FILE);
-    exit(EXIT_FAILURE);
+  if (f != NULL) { // El archivo existe
+    // Se cuentan la cantidad de lineas (ya que representan la cant. de paths)
+    n = 0;
+    while (!feof(f)){
+      c = fgetc(f);
+      if (c == '\n') n++;
+      if (c == EOF) break;
+    }
+
+    char paths[n][PATH_MAX];
+    
+    // Se mueve la pocision del apuntador al comienzo del archivo
+    fseek(f, 0, SEEK_SET);
+
+    // Se carga el archivo con los datos del arreglo
+    load_on_array(n, PATH_MAX, paths, &f);
+
+    // Se ordena el arreglo
+    selection_sort(n, PATH_MAX, paths);
+
+    // Se abre el reabre el archivo en modo escritura
+    freopen(fname, "w", f);
+    if (f == NULL) { // El archivo no se pudo abrir
+      printf("No se encontro o no se pudo abrir el archivo %s.\n", PATHS_FILE);
+      exit(EXIT_FAILURE);
+    }
+
+    // Se vuelcan los datos del arreglo en el archivo
+    load_on_file(n, PATH_MAX, paths, &f);
+
+    // Se cierra el archivo
+    fclose(f);
   }
-
-  // Se cuentan la cantidad de lineas (ya que representan la cant. de paths)
-  n = 0;
-  while (!feof(f)){
-    c = fgetc(f);
-    if (c == '\n') n++;
-    if (c == EOF) break;
-  }
-
-  char paths[n][PATH_MAX];
-  
-  // Se mueve la pocision del apuntador al comienzo del archivo
-  fseek(f, 0, SEEK_SET);
-
-  // Se carga el archivo con los datos del arreglo
-  load_on_array(n, PATH_MAX, paths, &f);
-
-  // Se ordena el arreglo
-  selection_sort(n, PATH_MAX, paths);
-
-  // Se abre el reabre el archivo en modo escritura
-  freopen(fname, "w", f);
-  if (f == NULL) { // El archivo no se pudo abrir
-    printf("No se encontro o no se pudo abrir el archivo %s.\n", PATHS_FILE);
-    exit(EXIT_FAILURE);
-  }
-
-  // Se vuelcan los datos del arreglo en el archivo
-  load_on_file(n, PATH_MAX, paths, &f);
-
-  // Se cierra el archivo
-  fclose(f);
 }
+
 
 // Carga en un arrglo de strings los datos de un archivo de texto
 void load_on_array(unsigned n, unsigned m, char a[n][m], FILE **file){
@@ -68,7 +66,7 @@ void load_on_array(unsigned n, unsigned m, char a[n][m], FILE **file){
 
 // Ordena un arreglo de strings usando el algoritmo Selection Sort
 void selection_sort (int n, int m, char strings[n][m]){
-  char temp[100];
+  char temp[m];
   
   // Algoritmo Selection Sort
   for (int i = 0; i < (n - 1); i++){
