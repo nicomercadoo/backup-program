@@ -2,8 +2,9 @@
 
 /* Constantes */
 #define MAX 300
-#define PATHS_FILE "paths.txt"
+#define PATHS_FILE "paths"
 #define PATH_MAX 4096
+#define ERROR_FILE_MSG "No se encontro o no se pudo abrir el archivo %s.\n"
 
 /* Colores */
 #define RED   "\x1B[31m"
